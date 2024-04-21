@@ -1,0 +1,30 @@
+<section class="row" id="modificar-on" layout:fragment="content">
+    <form class="col-md-12" action="#" th:attr="hx-put=@{/users/{id}(id=${usuario.id})}" hx-target="body" hx-swap="innerHTML">
+        <table class="table">
+            <tr>
+                <th>Nombre : </th>
+                <th>Apellido : </th>
+                <th>Cedula : </th>
+                <th>Fecha de nacimiento</th>
+                <th>Estado civil</th>
+                <th>Direccion : </th>
+                <th>Telefono : </th>
+                <th>Correo_electronico : </th>
+            </tr>
+            <tr>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.nombre}"></td>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.apellido}"></td>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.cedula}"></td>
+                <td><input type="date" style="width: 150px;" th:value="${usuario.fechaNacimiento}"></td>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.estadoCivil}"></td>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.direccion}"></td>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.telefono}"></td>
+                <td><input type="text" style="width: 150px;" th:value="${usuario.email}"></td>
+            </tr>
+        </table>
+        <div class="d-flex justify-content-around">
+            <button class="btn btn-success">Submit</button>
+            <button class="btn btn-warning" th:attr="hx-get=@{/users/getById/{id}(id=${usuario.id})}" hx-target="#modificar-on">Cancel</button>
+        </div>
+    </form>
+</section>

@@ -10,6 +10,7 @@ public class loginController {
 
     @GetMapping("path")
     public String getLogin(Model model) {
+        model.addAttribute("numero", 2);
         return new String();
     }
 }

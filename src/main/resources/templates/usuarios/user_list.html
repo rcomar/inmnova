@@ -1,0 +1,33 @@
+<section id="user_list">
+    <h2 th:if="${#lists.isEmpty(usuarios)}">No hay usuarios</h2>
+    <div th:unless="${#lists.isEmpty(usuarios)}">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>#</th>
+                <th>#</th>
+            </tr>
+            <tr th:each="usuario: ${usuarios}">
+                <td th:text="${usuario.id}">Id</td>
+                <td id="userName" th:text="${usuario.nombre}">Nombre</td>
+                <td th:text="${usuario.apellido}">Nombre</td>
+                <td>
+                    <input hx-target="#detalleUsuario" 
+                        th:attr="hx-get=@{/users/getById/{id}(id=${usuario.id})}" 
+                        class="btn btn-secondary" 
+                        type="submit" 
+                        value="Detalles">
+                </td>
+                <td hx-confirm="Estas seguro?" hx-target="closest tr" hx-swap="outerHTML">
+                    <input
+                        th:attr="hx-delete=@{/users/{id}(id=${usuario.id})}" 
+                        class="btn btn-danger" 
+                        type="submit" 
+                        value="Suspender">
+                </td>
+            </tr>                
+        </table>
+    </div>
+</section>

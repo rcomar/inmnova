@@ -1,0 +1,28 @@
+<section layout:fragment="content">
+        <div hx-target="this" hx-swap="outerHTML">
+            <table class="table">
+                <tr>
+                    <th>Nombre : </th>
+                    <th>Apellido : </th>
+                    <th>Cedula : </th>
+                    <th>Fecha de</th>
+                    <th>Estado ci</th>
+                    <th>Direccion : </th>
+                    <th>Telefono : </th>
+                    <th>Correo_electronico : </th>
+                </tr>
+                <tr>
+                    <td><span th:text=" ' ' + ${usuario.nombre}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.apellido}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.cedula}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.fechaNacimiento}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.estadoCivil}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.direccion}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.telefono}" ></span></td>
+                    <td><span th:text=" ' ' + ${usuario.email}" ></span></td>
+                </tr>
+            </table>
+            <button class="btn btn-primary" th:attr="hx-get=@{/users/update/{id}(id=${usuario.id})}">Modificar</button>
+        </div>
+        <!--<button class="btn btn-danger">Suspender</button>-->
+</section>
