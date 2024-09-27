@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.inmnova.gestion_inmobiliaria.Usuarios.Model.User;
-import com.mysql.cj.jdbc.Driver;
 @Repository
 public class UsuarioRepository {
 
@@ -27,26 +26,23 @@ public class UsuarioRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<User> getUserNames() {        
-
-        return jdbcTemplate.queryForList("Select nombre from usuario",User.class);        
+    public List<User> getUserNames() {
+        return jdbcTemplate.queryForList("Select nombre from user",User.class);        
     }
 
     public List<User> getAllUsers() {
-        return jdbcTemplate.query("Select id, nombre, apellido from usuario", new BeanPropertyRowMapper<User>(User.class));
+        return jdbcTemplate.query("Select id, nombre, apellido from user", new BeanPropertyRowMapper<User>(User.class));
     }
 
     public User getUserById(int id) {
-
-        String sql = "Select * from usuario Where id = ?";
+        String sql = "Select * from user Where id = ?";
         return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),id);
     }
 
     public User updateUser(int id, User user) throws SQLException {
-
         try (Connection conn = DriverManager.getConnection(url, username, password);
             PreparedStatement preparedStatement = conn.prepareStatement(
-            "UPDATE usuario set nombre = ?, apellido = ?, cedula = ?, fecha_de_nacimiento = ?, estado_civil = ?, direccion = ?, telefono = ?, correo_electronico = ? where id = ? ")) {
+            "UPDATE user set nombre = ?, apellido = ?, cedula = ?, fecha_de_nacimiento = ?, estado_civil = ?, direccion = ?, telefono = ?, correo_electronico = ? where id = ? ")) {
                 //SET
                 preparedStatement.setString(1, user.getNombre());
                 preparedStatement.setString(2, user.getApellido());
@@ -65,10 +61,9 @@ public class UsuarioRepository {
     }
 
     public void deleteUser(int id) throws SQLException {
-
         try (Connection conn = DriverManager.getConnection(url, username, password);
             PreparedStatement preparedStatement = conn.prepareStatement(
-            "UPDATE usuario set nombre = ? where id = ? ")) {
+            "UPDATE user set nombre = ? where id = ? ")) {
                 //SET
                 preparedStatement.setString(1, "borrado");
                 //WHERE
